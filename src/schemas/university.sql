@@ -12,16 +12,25 @@ CREATE TABLE courses (
 
 CREATE TABLE schedules (
     Sid INT PRIMARY KEY AUTO_INCREMENT,
-    FOREIGN KEY (Cid)
-        REFERENCES courses (Cid),
-	FOREIGN KEY (Pid)
+    course_id INT,
+    professor_id INT,
+    FOREIGN KEY (course_id)
+        REFERENCES courses (Cid)
+        ON DELETE CASCADE,
+    FOREIGN KEY (professor_id)
         REFERENCES persons (Pid)
+        ON DELETE CASCADE
 );
 
 CREATE TABLE registrations (
     Rid INT PRIMARY KEY AUTO_INCREMENT,
-    FOREIGN KEY (Cid)
-        REFERENCES courses (Cid),
-	FOREIGN KEY (Pid)
+    course_id INT,
+    student_id INT,
+    FOREIGN KEY (course_id)
+        REFERENCES courses (Cid)
+        ON DELETE CASCADE,
+    FOREIGN KEY (student_id)
         REFERENCES persons (Pid)
+        ON DELETE CASCADE
 );
+
