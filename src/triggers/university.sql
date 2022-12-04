@@ -8,7 +8,7 @@ CREATE TRIGGER insert_schedule
 		new.course_id = course_id)
 		THEN
 			SIGNAL SQLSTATE '45000'
-				SET MESSAGE_TEXT = 'Teacher cannot be Student of the course at the same time';
+				SET MESSAGE_TEXT = 'Professor cannot be student of the course at the same time';
 		END IF;
 	END;
     
@@ -20,7 +20,7 @@ CREATE TRIGGER insert_registration
 		new.course_id = course_id)
 		THEN
 			SIGNAL SQLSTATE '45000'
-				SET MESSAGE_TEXT = 'Student cannot be Teacher of the course at the same time';
+				SET MESSAGE_TEXT = 'Student cannot be professor of the course at the same time';
 		END IF;
 	END;
     
@@ -52,7 +52,7 @@ CREATE TRIGGER update_course_two
 			WHERE course.dept = 'CS' AND registration.course_id <>  old.Cid GROUP BY registration.course_id HAVING COUNT(*) >= 5)
 		THEN
 			SIGNAL SQLSTATE '45000'
-				SET MESSAGE_TEXT = 'There has to be at least one CS course with minimum 5 students';
+				SET MESSAGE_TEXT = 'There has to be at least one CS course with a minimum of 5 students';
 		END IF;
 	END;
 	
@@ -65,7 +65,7 @@ CREATE TRIGGER delete_registration
 			WHERE course.dept = 'CS' AND registration.course_id <>  old.course_id GROUP BY registration.course_id HAVING COUNT(*) >= 5)
 		THEN
 			SIGNAL SQLSTATE '45000'
-				SET MESSAGE_TEXT = 'There has to be at least one CS course with minimum 5 students';
+				SET MESSAGE_TEXT = 'There has to be at least one CS course with a minimum of 5 students';
 		END IF;
 	END;
     
