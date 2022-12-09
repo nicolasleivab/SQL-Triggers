@@ -21,3 +21,15 @@ CREATE TABLE preferences (
         REFERENCES products (product_id)
 );
 
+CREATE TABLE computed_preferences (
+    greater_product_id INT NOT NULL,
+    lesser_product_id INT NOT NULL,
+    customer_id INT NOT NULL,
+    FOREIGN KEY (customer_id)
+        REFERENCES customers (customer_id),
+    FOREIGN KEY (greater_product_id)
+        REFERENCES products (product_id),
+    FOREIGN KEY (lesser_product_id)
+        REFERENCES products (product_id)
+);
+
