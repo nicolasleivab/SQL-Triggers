@@ -2,7 +2,7 @@
 
 Practical application of MySQL triggers for different real case scenarios.
 
-1. University database constraints:
+1. University lectures database constraints:
 * Nobody can be a professor and a student at the same time, in any given course
 * Courses in the CS department can't be worth more than 10 credits.
 * There should be at least one CS course with at least 5 students.
@@ -18,9 +18,14 @@ Practical application of MySQL triggers for different real case scenarios.
 
 3. Customer preferences of a shop constraints:
 * A shop that sells several electronic products always store data about its customers preferences in terms of tuples (`greater_product_id` , `lesser_product_id`).
-* Whenever a customer's preference tuple is inserted, computed preferences are calculated to infer further values by transitiviy.
-E.g.: (1, 2), (2, 3) are the preferences of customer 1, this means that product 1 > product 2 > product 3, therefore (1, 3) is created and inserted into `computed_preferences`.
+* Whenever a customer's preference tuple is inserted, computed preferences are calculated by transitiviy.
+E.g.: (1, 2), (2, 3) are the preferences of customer 1, this means that product 1 > product 2 > product 3, therefore (1, 3) is automatically created and inserted into `computed_preferences`.
 * Circular preferences must be avoided (e.g.: (1, 1) or (1, 2), (2, 1)).
+
+4. Exam call rooms constraints:
+* During the exam call of a single subject at a given educational institution, students are enrolled and assigned to different rooms.
+* These rooms can have a maximum of 25 students assigned. Whenever a student withdraws, the enrollment is deleted and the respective room must be updated.
+* Everytime there is a reduction in the number of students of a room, a check will take place to consider the possibility of merging two rooms (max 25).
 
 ---
 
